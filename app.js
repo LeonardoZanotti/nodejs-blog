@@ -3,6 +3,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const app = express();
+const path = require('path');
 // const mongoose = require('mongoose');
 
 // Import the routes
@@ -19,6 +20,9 @@ const admin = require('./routes/admin');
 
     // mongoose
 
+
+    // static public files
+    app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.use('/dashboard', admin);
