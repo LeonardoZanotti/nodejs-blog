@@ -1,7 +1,37 @@
-<h2>Categories list</h2>
+<div style="display: flex;">
+    <a href="/dashboard" style="width: 5em">
+        <button class="btn btn-primary">
+            Back
+        </button>
+    </a>
+
+    <h2>Categories list</h2>
+</div>
+
 <hr>
+
 <a href="/dashboard/categories/add">
     <button class="btn btn-success">
         New category
     </button>
 </a>
+
+{{#each categories}}
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>{{name}}</h4>
+            <small>Id: {{_id}}</small>
+            <br>
+            <small>Slug: {{slug}}</small>
+            <br>
+            <small>Created in: {{date}}</small>
+            <br>
+            
+            <a href="/dashboard/categories/edit/{{_id}}">
+                <btn class="btn btn-warning mt-4">Edit</btn>
+            </a>
+        </div>
+    </div>
+{{else}}
+
+{{/each}}

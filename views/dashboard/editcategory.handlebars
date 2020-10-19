@@ -1,0 +1,54 @@
+{{#each errors}}
+    <div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
+
+<div style="display: flex;">
+    <a href="/dashboard/categories" style="width: 5em">
+        <button class="btn btn-primary">
+            Back
+        </button>
+    </a>
+
+    <h2>Edit category</h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/dashboard/categories/edit" method="POST">
+            {{#if category._id}}
+                <input type="hidden" name="id" value="{{category._id}}">
+            {{else}}
+                <input type="hidden" name="id" value="{{category.id}}">
+            {{/if}}
+            <div class="form-field">
+                <label for="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    class="form-control"
+                    value="{{category.name}}"    
+                >
+            </div>
+            <br>
+
+            <div class="form-field">
+                <label for="slug">Slug:</label>
+                <input
+                    type="text"
+                    id="slug"
+                    name="slug"
+                    placeholder="Slug"
+                    class="form-control"
+                    value="{{category.slug}}"
+                >
+            </div>
+            <br>
+
+            <button type="submit" class="btn btn-success">Edit category</button>
+        </form>
+    </div>
+</div>

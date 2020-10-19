@@ -13,7 +13,13 @@ router.get('/', (req, res) => {
 
 // Categories
 router.get('/categories', (req, res) => {
-    res.render('dashboard/categories');
+    Category.find().sort({name: 'asc', date: 'desc'}).lean().then(categories => {
+        res.render('dashboard/categories', {categories: categories});
+    }).catch((err) => {
+        console.log('\033[0;31mError listing the categories:', err);
+        req.flash('error_msg', 'Error listing the categories.');
+        res.redirect('/dashboard/categories');
+    });
 });
 
 router.get('/categories/add', (req, res) => {
@@ -56,7 +62,7 @@ router.post('/categories/new', (req, res) => {
 
     if (errors.length > 0) {
         console.log('\033[0;31mErrors creating the category:');
-        errors.forEach(error => {
+        errors.forEach((error) => {
             console.log(error);
         });
 
@@ -75,9 +81,82 @@ router.post('/categories/new', (req, res) => {
         }).catch((err) => {
             console.log('\033[0;31mError saving the category:', err);
             req.flash('error_msg', 'Error creating the category.');
-            res.redirect('/dashboard');
+            res.redirect('/dashboard/categories');
         });
     }    
+});
+
+router.get('/categories/edit/:id', (req, res) => {
+    Category.findOne({_id: req.params.id}).lean().then((category) => {
+        res.render('dashboard/editcategory', {category: category});
+    }).catch((err) => {
+        console.log('\033[0;31mError finding the category:', err);
+        req.flash('error_msg', 'Error finding the category.');
+        res.redirect('/dashboard/categories');
+    });
+});
+
+router.post('/categories/edit', (req, res) => {
+    // Validations
+    var errors = [];
+
+    if (
+        !req.body.name ||
+        req.body.name === null ||
+        typeof req.body.name === 'undefined'
+    ) {
+        errors.push({text: 'Invalid name!'});
+    }
+
+    if (
+        !req.body.slug ||
+        req.body.slug === null ||
+        typeof req.body.slug === 'undefined'
+    ) {
+        errors.push({text: 'Invalid slug!'});
+    }
+
+    if (req.body.name.length < 3) {
+        errors.push({text: 'Category name is too small!'});
+    }
+
+    if (req.body.slug.length < 3) {
+        errors.push({text: 'Category slug is too small!'});
+    }
+
+    if (req.body.slug.indexOf(' ') >= 0) {
+        errors.push({text: 'Slug cannot have spaces'});
+    }
+
+    slugModule.validateSlug(req.body.slug, errors);
+
+    if (errors.length > 0) {
+        console.log('\033[0;31mErrors editing the category:');
+        errors.forEach((error) => {
+            console.log(error);
+        });
+
+        res.render('dashboard/editcategory', {errors: errors, category: req.body});
+    } else {
+        // editing the category
+        Category.findOne({_id: req.body.id}).then((category) => {
+            category.name = req.body.name;
+            category.slug = req.body.slug;
+            category.save().then(() => {
+                console.log('\033[0;32mCategory successful edited');
+                req.flash('success_msg', 'Category successful edited.');
+                res.redirect('/dashboard/categories');
+            }).catch((err) => {
+                console.log('\033[0;31mError saving the category:', err);
+                req.flash('error_msg', 'Error saving the category.');
+                res.redirect('/dashboard/categories');
+            });
+        }).catch((err) => {
+            console.log('\033[0;31mError finding the category:', err);
+            req.flash('error_msg', 'Error finding the category.');
+            res.redirect('/dashboard/categories');
+        });
+    }  
 });
 
 
