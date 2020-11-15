@@ -2,6 +2,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 const app = express();
 const path = require('path');
 const session = require('express-session');
@@ -25,6 +26,9 @@ const loadingModule = require('./loading/loading');
     // flash
     app.use(flash());
 
+    // moment
+    moment.locale('pt-BR');
+
     // middleware -> all app.use are middleware actually
     app.use((req, res, next) => {
         // global variables
@@ -40,7 +44,16 @@ const loadingModule = require('./loading/loading');
     app.use(bodyParser.json());
 
     // express-handlebars
-    app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
+    const exphbs = handlebars.create({
+        defaultLayout: 'main',
+        helpers: {
+            dateFormat: function(date, options) {
+                const format = options.name === 'dateFormat' ? 'DD/MM/YYYY - HH:mm' : options;
+                return moment(date).format(format);
+            }
+        }
+    });
+    app.engine('handlebars', exphbs.engine);
     app.set('view engine', 'handlebars');
 
     // mongoose

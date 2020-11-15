@@ -19,13 +19,13 @@
         <form action="/dashboard/categories/new" method="POST">
             <div class="form-field">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+                <input type="text" id="name" name="name" value="{{category.name}}" placeholder="Name" class="form-control" required>
             </div>
             <br>
 
             <div class="form-field">
                 <label for="slug">Slug:</label>
-                <input type="text" id="slug" name="slug" placeholder="Slug" class="form-control">
+                <input type="text" id="slug" name="slug" value="{{category.slug}}" placeholder="Slug" class="form-control" required>
             </div>
             <br>
 
