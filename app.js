@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const admin = require('./routes/admin');
 
 // Import the modules
-const loadingModule = require('./loading/loading');
+const loadingModule = require('./helpers/loading');
 
 // Configurations
     // session
@@ -63,11 +63,20 @@ const loadingModule = require('./loading/loading');
         { 
             useNewUrlParser: true,
             useUnifiedTopology: true
-        }).then(() => {
-        console.log('\033[0;35mMongoose connected');
-    }).catch((err) => {
-        console.log('\033[0;31mMongoose error:', err);
-    });
+        }).then(db => {
+            console.log('Replica active -', db.connection.replica);
+            console.log('Connection name -', db.connection.name);
+            console.log('Connection -', db.connection._connectionString);
+            console.log('Driver info -', db.connection._connectionOptions.driverInfo);
+            console.log('Host -', db.connection.host);
+            console.log('Port -', db.connection.port);
+            console.log('\033[0;35mLoading Mongoose models...');
+            console.log('\033[0;32mLoaded -', db.models);
+            console.log(db.options);
+            console.log('\033[0;35mMongoose connected');
+        }).catch((err) => {
+            console.log('\033[0;31mMongoose error:', err);
+        });
 
     // static public files
     app.use(express.static(path.join(__dirname, 'public')))
