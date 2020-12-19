@@ -21,7 +21,7 @@ exports.addPostPage = (req, res) => {
     }).catch((err) => {
         console.log('\033[0;31mError listing the categories:', err);
         req.flash('error_msg', 'Error listing the categories.');
-        res.redirect('/dashboard/posts/posts');
+        res.redirect('/dashboard/posts');
     });
 }
 
@@ -40,7 +40,7 @@ exports.newPost = (req, res) => {
         }).catch((err) => {
             console.log('\033[0;31mError listing the categories:', err);
             req.flash('error_msg', 'Error listing the categories.');
-            res.redirect('/dashboard/posts/posts');
+            res.redirect('/dashboard/posts');
         });
     } else {
         // creating the post
@@ -55,11 +55,11 @@ exports.newPost = (req, res) => {
         new Post(newPost).save().then(() => {
             console.log('\033[0;32mPost successful created');
             req.flash('success_msg', 'Post successful created!');
-            res.redirect('/dashboard/posts/posts');
+            res.redirect('/dashboard/posts');
         }).catch((err) => {
             console.log('\033[0;31mError saving the post:', err);
             req.flash('error_msg', 'Error creating the post.');
-            res.redirect('/dashboard/posts/posts');
+            res.redirect('/dashboard/posts');
         });
     }
 }
@@ -71,12 +71,12 @@ exports.editPostPage = (req, res) => {
         }).catch((err) => {
             console.log('\033[0;31mError listing the categories:', err);
             req.flash('error_msg', 'Error listing the categories.');
-            res.redirect('/dashboard/posts/posts');
+            res.redirect('/dashboard/posts');
         });
     }).catch((err) => {
         console.log('\033[0;31mError finding the post:', err);
         req.flash('error_msg', 'Error finding the post.');
-        res.redirect('/dashboard/posts/posts');
+        res.redirect('/dashboard/posts');
     });
 }
 
@@ -95,7 +95,7 @@ exports.editPost = (req, res) => {
         }).catch((err) => {
             console.log('\033[0;31mError listing the categories:', err);
             req.flash('error_msg', 'Error listing the categories.');
-            res.redirect('/dashboard/posts/posts');
+            res.redirect('/dashboard/posts');
         });
     } else {
         // updating the post
@@ -108,16 +108,16 @@ exports.editPost = (req, res) => {
             post.save().then(() => {
                 console.log('\033[0;32mPost successful edited');
                 req.flash('success_msg', 'Post successful edited.');
-                res.redirect('/dashboard/posts/posts');
+                res.redirect('/dashboard/posts');
             }).catch((err) => {
                 console.log('\033[0;31mError saving the post:', err);
                 req.flash('error_msg', 'Error saving the post.');
-                res.redirect('/dashboard/posts/posts');
+                res.redirect('/dashboard/posts');
             });
         }).catch((err) => {
             console.log('\033[0;31mError finding the post:', err);
             req.flash('error_msg', 'Error finding the post.');
-            res.redirect('/dashboard/posts/posts');
+            res.redirect('/dashboard/posts');
         });
     }    
 }
