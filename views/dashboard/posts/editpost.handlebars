@@ -11,12 +11,13 @@
         </button>
     </a>
 
-    <h2>New post</h2>
+    <h2>Edit post</h2>
 </div>
 
 <div class="card">
     <div class="card-body">
-        <form action="/dashboard/posts/new" method="POST">
+        <form action="/dashboard/posts/edit" method="POST">
+            <input type="hidden" value="{{post._id}}" name="id">
             <label for="title">Title</label>
             <input type="text" name="title" value="{{post.title}}" class="form-control mb-4" placeholder="Title" required>
 
@@ -30,7 +31,11 @@
             <select name="category" class="custom-select mb-4" required>
                 <option value="">Select one...</option>
                 {{#each categories}}
-                    <option value="{{_id}}">{{name}}</option>
+                    {{#ifEqual _id ../post/category }}
+                        <option value="{{_id}}" selected>{{name}}</option>
+                    {{else}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{/ifEqual}}
                 {{else}}
                     <option value="0">No categories found</option>
                 {{/each}}
@@ -39,7 +44,7 @@
             <label for="content">Content</label>
             <textarea name="content" class="form-control mb-4" placeholder="Content" required>{{post.content}}</textarea>
             
-            <button class="btn btn-success" type="submit">Create post</button>
+            <button class="btn btn-success" type="submit">Edit post</button>
         </form>
     </div>
 </div>

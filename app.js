@@ -50,6 +50,9 @@ const loadingModule = require('./helpers/loading');
             dateFormat: function(date, options) {
                 const format = options.name === 'dateFormat' ? 'DD/MM/YYYY - HH:mm' : options;
                 return moment(date).format(format);
+            },
+            ifEqual: function(arg1, arg2, options) {
+                return arg1.toString() === arg2.toString() ? options.fn(this) : options.inverse(this);
             }
         }
     });
@@ -58,7 +61,7 @@ const loadingModule = require('./helpers/loading');
 
     // mongoose
     mongoose.Promise = global.Promise;
-     mongoose.connect(
+    mongoose.connect(
         'mongodb://localhost/blogapp',
         { 
             useNewUrlParser: true,
@@ -83,12 +86,6 @@ const loadingModule = require('./helpers/loading');
 
 // Routes
 app.use('/dashboard', admin);
-
-// Models
-
-
-// Others
-
 
 // Listen
 const port = 8000;

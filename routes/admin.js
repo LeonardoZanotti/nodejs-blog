@@ -22,6 +22,9 @@ router.post('/categories/delete', CategoryController.deleteCategory);
 router.get('/posts', PostController.posts);
 router.get('/posts/add', PostController.addPostPage);
 router.post('/posts/new', PostController.newPost);
+router.get('/posts/edit/:id', PostController.editPostPage);
+router.post('/posts/edit', PostController.editPost);
+router.post('/posts/delete', PostController.deletePost);
 
 // If route not find (404)
 router.get('/categories/**', NotFoundController.categories);

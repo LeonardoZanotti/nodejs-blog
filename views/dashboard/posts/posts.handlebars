@@ -24,6 +24,16 @@
             <small>Category: {{category.name}}</small>
             <br>
             <small>Created in: {{dateFormat date}}</small>
+            <br>
+
+            <a href="/dashboard/posts/edit/{{_id}}">
+                <button class="btn btn-warning mt-4">Edit</button>
+            </a>
+            
+            <form action="/dashboard/posts/delete" method="POST">
+                <input type="hidden" name="id" value="{{_id}}">
+                <button type="submit" class="btn btn-danger mt-2">Delete</button>
+            </form>
         </div>
     </div>
 {{else}}
