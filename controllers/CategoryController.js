@@ -9,7 +9,7 @@ exports.categories = (req, res) => {
     }).catch((err) => {
         console.log('\033[0;31mError listing the categories:', err);
         req.flash('error_msg', 'Error listing the categories.');
-        res.redirect('/dashboard/categories');
+        res.redirect('/api/dashboard/categories');
     });
 }
 
@@ -39,11 +39,11 @@ exports.newCategory = (req, res) => {
         new Category(newCategory).save().then(() => {
             console.log('\033[0;32mCategory successful created');
             req.flash('success_msg', 'Category successful created!');
-            res.redirect('/dashboard/categories');
+            res.redirect('/api/dashboard/categories');
         }).catch((err) => {
             console.log('\033[0;31mError creating the category:', err);
             req.flash('error_msg', 'Error creating the category.');
-            res.redirect('/dashboard/categories');
+            res.redirect('/api/dashboard/categories');
         });
     }    
 }
@@ -54,7 +54,7 @@ exports.editCategoryPage = (req, res) => {
     }).catch((err) => {
         console.log('\033[0;31mError finding the category:', err);
         req.flash('error_msg', 'Error finding the category.');
-        res.redirect('/dashboard/categories');
+        res.redirect('/api/dashboard/categories');
     });
 }
 
@@ -78,16 +78,16 @@ exports.editCategory = (req, res) => {
             category.save().then(() => {
                 console.log('\033[0;32mCategory successful edited');
                 req.flash('success_msg', 'Category successful edited.');
-                res.redirect('/dashboard/categories');
+                res.redirect('/api/dashboard/categories');
             }).catch((err) => {
                 console.log('\033[0;31mError saving the category:', err);
                 req.flash('error_msg', 'Error saving the category.');
-                res.redirect('/dashboard/categories');
+                res.redirect('/api/dashboard/categories');
             });
         }).catch((err) => {
             console.log('\033[0;31mError finding the category:', err);
             req.flash('error_msg', 'Error finding the category.');
-            res.redirect('/dashboard/categories');
+            res.redirect('/api/dashboard/categories');
         });
     }  
 }
@@ -96,10 +96,10 @@ exports.deleteCategory = (req, res) => {
     Category.remove({_id: req.body.id}).then(() => {
         console.log('\033[0;32mCategory successful deleted');
         req.flash('success_msg', 'Category successful deleted.');
-        res.redirect('/dashboard/categories');
+        res.redirect('/api/dashboard/categories');
     }).catch((err) => {
         console.log('\033[0;31mError deleting the category:', err);
         req.flash('error_msg', 'Error deleting the category.');
-        res.redirect('/dashboard/categories');
+        res.redirect('/api/dashboard/categories');
     });
 }

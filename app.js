@@ -10,7 +10,7 @@ const flash = require('connect-flash');
 const mongoose = require('mongoose');
 
 // Import the routes
-const admin = require('./routes/admin');
+const routes = require('./routes/api');
 
 // Import the modules
 const loadingModule = require('./helpers/loading');
@@ -85,7 +85,7 @@ const loadingModule = require('./helpers/loading');
     app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
-app.use('/dashboard', admin);
+app.use('/api', routes);
 
 // Listen
 const port = 8000;

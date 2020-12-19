@@ -1,5 +1,5 @@
 <div style="display: flex;">
-    <a href="/dashboard" style="width: 5em">
+    <a href="/api/dashboard" style="width: 5em">
         <button class="btn btn-primary">
             Back
         </button>
@@ -10,7 +10,7 @@
 
 <hr>
 
-<a href="/dashboard/posts/add">
+<a href="/api/dashboard/posts/add">
     <button class="btn btn-success">
         New post
     </button>
@@ -26,11 +26,11 @@
             <small>Created in: {{dateFormat date}}</small>
             <br>
 
-            <a href="/dashboard/posts/edit/{{_id}}">
+            <a href="/api/dashboard/posts/edit/{{_id}}">
                 <button class="btn btn-warning mt-4">Edit</button>
             </a>
             
-            <form action="/dashboard/posts/delete" method="POST">
+            <form action="/api/dashboard/posts/delete" method="POST">
                 <input type="hidden" name="id" value="{{_id}}">
                 <button type="submit" class="btn btn-danger mt-2">Delete</button>
             </form>

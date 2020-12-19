@@ -133,7 +133,7 @@ exports.validatePost = async function validatePost(body, errors) {
         errors.push({text: 'Post content is too small!'});
     }
 
-    if (body.content.length > 500) {
+    if (body.content.length > 10000) {
         errors.push({text: 'Post content is too large!'});
     }
 }

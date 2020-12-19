@@ -5,7 +5,7 @@
 {{/each}}
 
 <div style="display: flex;">
-    <a href="/dashboard/categories" style="width: 5em">
+    <a href="/api/dashboard/categories" style="width: 5em">
         <button class="btn btn-primary">
             Back
         </button>
@@ -16,7 +16,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="/dashboard/categories/edit" method="POST">
+        <form action="/api/dashboard/categories/edit" method="POST">
             {{#if category._id}}
                 <input type="hidden" name="id" value="{{category._id}}">
             {{else}}

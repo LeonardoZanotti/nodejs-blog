@@ -1,11 +1,19 @@
+exports.dashboard = (req, res) => {
+    res.redirect('/api/dashboard');
+}
+
 exports.categories = (req, res) => {
-    res.redirect('/dashboard/categories');
+    res.redirect('/api/dashboard/categories');
 }
 
 exports.posts = (req, res) => {
-    res.redirect('/dashboard/posts');
+    res.redirect('/api/dashboard/posts');
 }
 
-exports.dashboard = (req, res) => {
-    res.redirect('/dashboard');
+exports.api = (req, res) => {
+    res.redirect('/api');
+}
+
+exports.notFound = (req, res) => {
+    res.render('user/notFound/notFound');
 }

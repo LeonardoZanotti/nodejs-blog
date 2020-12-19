@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const HomeController = require('../controllers/HomeController');
-const CategoryController = require('../controllers/CategoryController');
-const PostController = require('../controllers/PostController');
-const NotFoundController = require('../controllers/NotFoundController');
+const HomeController = require('../../controllers/HomeController');
+const CategoryController = require('../../controllers/CategoryController');
+const PostController = require('../../controllers/PostController');
+const NotFoundController = require('../../controllers/NotFoundController');
 
 // Home
-router.get('/', HomeController.home);
+router.get('/', HomeController.adminHome);
 
 // Categories
 router.get('/categories', CategoryController.categories);
