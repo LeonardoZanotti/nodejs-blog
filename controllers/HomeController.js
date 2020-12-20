@@ -5,3 +5,7 @@ exports.adminHome = (req, res) => {
 exports.userHome = (req, res) => {
     res.redirect('/api/posts');
 }
+
+exports.authHome = (req, res) => {
+    res.redirect('/api/auth/register');
+}

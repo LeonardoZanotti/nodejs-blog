@@ -1,4 +1,4 @@
-exports.validatePost = async function validatePost(body, errors) {
+exports.validatePost = async (body, errors) => {
     // title
     if (
         !body.title ||

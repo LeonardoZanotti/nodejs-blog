@@ -14,6 +14,10 @@ exports.api = (req, res) => {
     res.redirect('/api');
 }
 
+exports.auth = (req, res) => {
+    res.redirect('/api/auth');
+}
+
 exports.notFound = (req, res) => {
     res.render('user/notFound/notFound');
 }

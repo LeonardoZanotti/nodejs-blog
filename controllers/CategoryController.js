@@ -45,7 +45,7 @@ exports.newCategory = (req, res) => {
             req.flash('error_msg', 'Error creating the category.');
             res.redirect('/api/dashboard/categories');
         });
-    }    
+    }
 }
 
 exports.editCategoryPage = (req, res) => {
@@ -89,7 +89,7 @@ exports.editCategory = (req, res) => {
             req.flash('error_msg', 'Error finding the category.');
             res.redirect('/api/dashboard/categories');
         });
-    }  
+    }
 }
 
 exports.deleteCategory = (req, res) => {

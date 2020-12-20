@@ -8,6 +8,8 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
+const passport = require('passport');
+require('./config/auth')(passport);
 
 // Import the routes
 const routes = require('./routes/api');
@@ -23,6 +25,10 @@ const loadingModule = require('./helpers/loading');
         saveUninitialized: true
     }));
 
+    // passport
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     // flash
     app.use(flash());
 
@@ -34,6 +40,8 @@ const loadingModule = require('./helpers/loading');
         // global variables
         res.locals.success_msg = req.flash('success_msg');
         res.locals.error_msg = req.flash('error_msg');
+        res.locals.error = req.flash('error');
+        res.locals.user = req.user || null;
 
         console.log('\033[34mMiddleware control - Access granted');
         next();     // go ahead and do all the other things of the project

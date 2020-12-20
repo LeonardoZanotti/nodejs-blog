@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const NotFoundController = require('../../controllers/NotFoundController');
-const HomeController = require('../../controllers/HomeController');
 const BlogController = require('../../controllers/BlogController');
+const HomeController = require('../../controllers/HomeController');
+const NotFoundController = require('../../controllers/NotFoundController');
 
 // Home
 router.get('/', HomeController.userHome);

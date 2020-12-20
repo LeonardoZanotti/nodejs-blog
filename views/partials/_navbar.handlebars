@@ -12,12 +12,25 @@
       <li class="nav-item">
         <a class="nav-link" href="/api/categories">Categories</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/api/">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/api/">Register</a>
-      </li>
+      {{#if user}}
+      {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/api/auth/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/api/auth/register">Register</a>
+        </li>
+      {{/if}}
     </ul>
+    {{#if user}}
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/api/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/api/auth/logout">Logout</a>
+          </li>
+      </ul>
+    {{/if}}
   </div>
 </nav>

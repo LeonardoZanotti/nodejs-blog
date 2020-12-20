@@ -2,33 +2,36 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const HomeController = require('../../controllers/HomeController');
 const CategoryController = require('../../controllers/CategoryController');
-const PostController = require('../../controllers/PostController');
+const HomeController = require('../../controllers/HomeController');
 const NotFoundController = require('../../controllers/NotFoundController');
+const PostController = require('../../controllers/PostController');
+
+// Authentication
+const { isAdmin } = require('../../helpers/isAdmin');
 
 // Home
-router.get('/', HomeController.adminHome);
+router.get('/', isAdmin, HomeController.adminHome);
 
 // Categories
-router.get('/categories', CategoryController.categories);
-router.get('/categories/add', CategoryController.addCategoryPage);
-router.post('/categories/new', CategoryController.newCategory);
-router.get('/categories/edit/:id', CategoryController.editCategoryPage);
-router.post('/categories/edit', CategoryController.editCategory);
-router.post('/categories/delete', CategoryController.deleteCategory);
+router.get('/categories', isAdmin, CategoryController.categories);
+router.get('/categories/add', isAdmin, CategoryController.addCategoryPage);
+router.post('/categories/new', isAdmin, CategoryController.newCategory);
+router.get('/categories/edit/:id', isAdmin, CategoryController.editCategoryPage);
+router.post('/categories/edit', isAdmin, CategoryController.editCategory);
+router.post('/categories/delete', isAdmin, CategoryController.deleteCategory);
 
 // Posts
-router.get('/posts', PostController.posts);
-router.get('/posts/add', PostController.addPostPage);
-router.post('/posts/new', PostController.newPost);
-router.get('/posts/edit/:id', PostController.editPostPage);
-router.post('/posts/edit', PostController.editPost);
-router.post('/posts/delete', PostController.deletePost);
+router.get('/posts', isAdmin, PostController.posts);
+router.get('/posts/add', isAdmin, PostController.addPostPage);
+router.post('/posts/new', isAdmin, PostController.newPost);
+router.get('/posts/edit/:id', isAdmin, PostController.editPostPage);
+router.post('/posts/edit', isAdmin, PostController.editPost);
+router.post('/posts/delete', isAdmin, PostController.deletePost);
 
 // If route not find (404)
-router.get('/categories/**', NotFoundController.categories);
-router.get('/posts/**', NotFoundController.posts);
-router.get('**', NotFoundController.dashboard);
+router.get('/categories/**',isAdmin, NotFoundController.categories);
+router.get('/posts/**', isAdmin, NotFoundController.posts);
+router.get('**', isAdmin, NotFoundController.dashboard);
 
 module.exports = router;

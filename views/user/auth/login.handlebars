@@ -1,0 +1,33 @@
+<h2>Login</h2>
+
+<hr>
+
+{{#each errors}}
+    <div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="card">
+    <div class="card-body">
+        <form action="/api/auth/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="{{user.email}}" class="form-control mb-4" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password"  value="{{user.password}}" class="form-control mb-4" required>
+
+
+            Does not have an account?
+            <div class="d-flex justify-content-between">
+                <a href="/api/auth/register">
+                    <button type="button" class="btn btn-primary mt-2">
+                        Create one!
+                    </button>
+                </a>
+
+                <button type="submit" class="btn btn-success mt-2">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

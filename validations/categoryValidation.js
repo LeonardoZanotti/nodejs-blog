@@ -1,4 +1,4 @@
-exports.validateCategory = async function validateCategory(body, errors) {
+exports.validateCategory = async (body, errors) => {
     // name
     if (
         !body.name ||
