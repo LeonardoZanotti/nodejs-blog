@@ -11,6 +11,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 require('./config/auth')(passport);
 
+// Import the database configuration
+const db = require('./config/db');
+
 // Import the routes
 const routes = require('./routes/api');
 
@@ -70,7 +73,7 @@ const loadingModule = require('./helpers/loading');
     // mongoose
     mongoose.Promise = global.Promise;
     mongoose.connect(
-        'mongodb://localhost/blogapp',
+        db.mongoURI,
         { 
             useNewUrlParser: true,
             useUnifiedTopology: true
@@ -88,6 +91,7 @@ const loadingModule = require('./helpers/loading');
         }).catch((err) => {
             console.log('\033[0;31mMongoose error:', err);
         });
+    console.log('Using ', db.mongoURI);
 
     // static public files
     app.use(express.static(path.join(__dirname, 'public')))
@@ -96,7 +100,7 @@ const loadingModule = require('./helpers/loading');
 app.use('/api', routes);
 
 // Listen
-const port = 8000;
+const port = process.env.PORT || 8000;
 app.listen(port, async () => {
     await loadingModule.loadDir('./');        // list the files in this directory
     console.log('\033[0;32mServer listening on port', port);
