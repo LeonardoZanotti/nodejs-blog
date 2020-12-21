@@ -15,7 +15,7 @@ require('./config/auth')(passport);
 const db = require('./config/db');
 
 // Import the routes
-const routes = require('./routes/api');
+const routes = require('./routes/index');
 
 // Import the modules
 const loadingModule = require('./helpers/loading');
@@ -97,7 +97,7 @@ const loadingModule = require('./helpers/loading');
     app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
-app.use('/api', routes);
+app.use('/', routes);
 
 // Listen
 const port = process.env.PORT || 8000;

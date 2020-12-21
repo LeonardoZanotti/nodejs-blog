@@ -9,3 +9,7 @@ exports.userHome = (req, res) => {
 exports.authHome = (req, res) => {
     res.redirect('/api/auth/register');
 }
+
+exports.apiHome = (req, res) => {
+    res.redirect('/api');
+}
